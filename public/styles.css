@@ -77,6 +77,10 @@ body {
     background-color: #116233;
 }
 
+.historyButton:hover {
+    background-color: #1b48ce;
+}
+
 .image {
     position: absolute;
     bottom: 0;
