@@ -15,7 +15,6 @@ async function dbInit() {
     port: 5432,
     database: "riddles",
   }
-
 );
 
   await client.connect();
@@ -31,6 +30,10 @@ app.get("/", async (req, res) => {
   const data = await dbInit();
   console.log(data);
   res.render("index.ejs", {all: data.all, today: data.today}); //static
+})
+
+app.get("/history", (req, res) => {
+  res.render("history.ejs");
 })
 
 app.listen(PORT, function (err) {
