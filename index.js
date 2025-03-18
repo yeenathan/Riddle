@@ -1,12 +1,22 @@
 const express = require("express");
+const pg = require("pg");
 const app = express();
 const PORT = 3000;
 
 app.set("view engine", "ejs");
 // app.use(express.urlencoded({extended:true}))
 
-app.get("/", (req, res) => {
-  res.render("index.ejs"); //static
+app.get("/", async (req, res) => {
+  const client = new pg.Client({
+    database: "mydb"
+  });
+  await client.connect();
+  const result = await client.query("SELECT * FROM public.riddle WHERE date<now()"); //gets all riddles up to today
+
+  const all = result.rows;
+  const today = all[all.length-1];
+
+  res.render("index.ejs", {all: all, today: today}); //static
 })
 
 app.listen(PORT, function (err) {
