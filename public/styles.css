@@ -1,43 +1,50 @@
+@font-face {
+    font-family: 'riddle-upright'; 
+    src: url('/fonts/Riddle-Upright.otf');
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'riddle-upright', sans-serif;
     max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    margin: auto;
     background-color: #f0f0f0;
 }
 
 .title {
-    color: #2c3e50;
+    color: #01b05f;
     text-align: center;
-    font-size: 2.5em;
-    margin-bottom: 20px;
+    font-size: 5em;
+    margin-bottom: 1rem;
 }
 
 .header {
     color: #34495e;
     text-align: center;
-    font-size: 1.8em;
-    margin-bottom: 30px;
+    font-size: 2.5rem;
+    margin-top: -1rem;
 }
 
 .question {
     display: block;
+    font-family: 'Segoe UI';
     font-size: 1.2em;
     margin-bottom: 15px;
     color: #444;
 }
 
 .textBox {
-    width: 100%;
-    padding: 10px;
+    width: 93%;
+    padding: 1rem;
     margin-bottom: 20px;
     border: 2px solid #3498db;
     border-radius: 5px;
     font-size: 1em;
 }
 
-.button {
+.button {   
     background-color: #2ecc71;
+    font-family: "Segoe UI";
+    font-weight: bold;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -48,15 +55,17 @@ body {
 }
 
 .button:hover {
-    background-color: #27ae60;
+    background-color: #116233;
 }
 
 .image {
-    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     max-width: 300px;
-    margin: 30px auto;
+    margin: 0;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 form {
