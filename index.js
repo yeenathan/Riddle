@@ -9,8 +9,14 @@ app.use(express.static('public'));
 
 app.get("/", async (req, res) => {
   const client = new pg.Client({
-    database: "mydb"
-  });
+    user: "postgres",
+    password: "hihihi2324",
+    host: "localhost",
+    port: 5432,
+    database: "riddles",
+  }
+
+);
   await client.connect();
   const result = await client.query("SELECT * FROM public.riddle WHERE date<now()"); //gets all riddles up to today
 
