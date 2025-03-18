@@ -24,22 +24,34 @@ body {
     margin-top: -1rem;
 }
 
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
 .question {
     display: block;
     font-family: 'Segoe UI';
     font-size: 1.2em;
     margin-bottom: 15px;
     color: #444;
+    text-align: center;
+    max-width: 80%;
 }
 
 .textBox {
-    width: 93%;
+    width: 80%;
     padding: 1rem;
     margin-bottom: 20px;
     border: 2px solid #3498db;
     border-radius: 5px;
     font-size: 1em;
+    text-align: center;
 }
+
 
 .button {   
     background-color: #2ecc71;
@@ -68,11 +80,16 @@ body {
     border-radius: 10px;
 }
 
+
 form {
+    width: 100%;
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
