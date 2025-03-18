@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Riddler</title>
+  <title>Riddle</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
@@ -12,11 +12,18 @@
   <h2 class="header">Riddle me this...</h2>
   <button class="historyButton">History</button>
   <div class="formContainer">
-  <form>
-    <label class="question" for="answer">The person who makes it sells it. The person who buys it never uses it. The person who uses it never knows they're using it. What is it?</label>
+  <form method="post" action="submit">
+    <label class="question" for="answer"><%= today.question %></label>
     <input class="textBox" type="text" id="answer" name="answer">
     <button class="button" type="submit">Submit</button>
   </form>
+  <% if (locals.answered != null) { %>
+    <% if (answered) { %>
+      <h2>CORRECT!!!</h2>
+    <% } else { %>
+      <h2>INCORRECT!!</h2>
+    <% } %>
+  <% } %>
 </div>
 </div>
   <img class="image" src="/TheRiddler.png" alt="The Riddler">

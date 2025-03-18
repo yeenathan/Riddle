@@ -4,7 +4,7 @@ const app = express();
 const PORT = 3000;
 
 app.set("view engine", "ejs");
-// app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({extended:true}))
 app.use(express.static('public'));
 
 async function dbInit() {
@@ -22,8 +22,14 @@ async function dbInit() {
 
 app.get("/", async (req, res) => {
   const data = await dbInit();
-  console.log(data);
   res.render("index.ejs", {all: data.all, today: data.today}); //static
+})
+
+app.post("/submit", async (req, res) => {
+  const data = await dbInit();
+  const answer = req.body["answer"];
+  const correctAnswer = data.today["answer"];
+  res.render("index.ejs", {today: data.today, answered: answer.toLowerCase() === correctAnswer.toLowerCase()});
 })
 
 app.listen(PORT, function (err) {
