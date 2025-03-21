@@ -5,13 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History</title>
     <link rel="stylesheet" href="/styles.css">
+    <style>
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .history-table th, .history-table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .history-table th {
+            background-color: #f2f2f2;
+        }
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <div class="mainContainer">
-        <h1 class="title">History</h1>
-        <h2 class="header">Lets see how you've done!</h2>
-        <a href="/"><button class="historyButton" >Back To Home</button></a>
-        <p></p>
+        <a class="titleButton" href="/">
+            <h1 class="title">History</h1>
+        </a>
+        <h2 class="header">Let's see how you've done!</h2>
+        <a href="/"><button class="historyButton">Back To Home</button></a>
+        
+        <% if (locals.history && history.length > 0) { %>
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% history.forEach(entry => { %>
+                        <tr>
+                            <td><%= entry.id %></td>
+                            <td><%= new Date(entry.date).toLocaleDateString() %></td>
+                            <td class="<%= entry.status ? 'correct' : 'incorrect' %>">
+                                <%= entry.status ? 'Correct' : 'Incorrect' %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No history available yet. Try answering some riddles!</p>
+        <% } %>
     </div>
 </body>
 </html>
