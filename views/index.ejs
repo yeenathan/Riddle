@@ -19,16 +19,17 @@
       <form method="post" action="submit">
         <label class="question" for="answer"><%= today.question %></label>
         <input class="textBox" type="text" id="answer" name="answer">
-        <button class="button" type="submit">Submit</button>
+        <% if (locals.answered != null && !answered) { %>
+          <button class="button" type="submit" style="background-color: red;">Try Again</button>
+        <% } else { %>
+          <button class="button" type="submit">Submit</button>
+        <% } %>
       </form>
-      
-      <% if (locals.answered != null && !answered) { %>
-        <h2>INCORRECT!!</h2>
-      <% } %>
+
     </div>
   <% } else { %>
     <div class="formContainer">
-      <h2>CORRECT!!!</h2>
+      <h2 class="correctText">CORRECT!!!</h2>
     </div>
   <% } %>
 </div>
