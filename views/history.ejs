@@ -6,17 +6,17 @@
     <title>History</title>
     <link rel="stylesheet" href="/styles.css">
     <style>
-        .history-table {
+        .historyTable {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-        .history-table th, .history-table td {
+        .historyTable th, .historyTable td {
             padding: 10px;
             text-align: left;
             border: 1px solid #ddd;
         }
-        .history-table th {
+        .historyTable th {
             background-color: #f2f2f2;
         }
         .correct {
@@ -26,6 +26,12 @@
         .incorrect {
             color: red;
             font-weight: bold;
+        }
+        .riddle-text {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -38,10 +44,11 @@
         <a href="/"><button class="historyButton">Back To Home</button></a>
         
         <% if (locals.history && history.length > 0) { %>
-            <table class="history-table">
+            <table class="historyTable">
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Riddle</th>
                         <th>Date</th>
                         <th>Result</th>
                     </tr>
@@ -50,6 +57,7 @@
                     <% history.forEach(entry => { %>
                         <tr>
                             <td><%= entry.id %></td>
+                            <td class="riddle-text" title="<%= entry.riddle %>"><%= entry.riddle %></td>
                             <td><%= new Date(entry.date).toLocaleDateString() %></td>
                             <td class="<%= entry.status ? 'correct' : 'incorrect' %>">
                                 <%= entry.status ? 'Correct' : 'Incorrect' %>
