@@ -24,6 +24,10 @@ body {
     margin-bottom: 1rem;
 }
 
+.titleButton {
+    text-decoration: none;
+}
+
 .header {
     color: #34495e;
     text-align: center;
@@ -89,6 +93,14 @@ body {
     max-width: 225px;
     margin: 0;
     border-radius: 10px;
+}
+
+.correctText {
+    color: #2ecc71;
+    font-size: 5em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1rem;
 }
     
 
