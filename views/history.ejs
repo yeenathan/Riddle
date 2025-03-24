@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>History</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="mainContainer">
+      <a class="titleButton" href="/">
+        <h1 class="title">History</h1>
+      </a>
+      <h2 class="header">Let's see how you've done!</h2>
+      <a href="/"><button class="historyButton">Back To Home</button></a>
+
+      <% if (locals.history && history.length > 0) { %>
+      <table class="historyTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Riddle</th>
+            <th>Date</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% history.forEach(entry => { %>
+          <tr>
+            <td><%= entry.id %></td>
+            <td class="riddle-text" title="<%= entry.riddle %>">
+              <%= entry.riddle %>
+            </td>
+            <td><%= new Date(entry.date).toLocaleDateString() %></td>
+            <td class="<%= entry.status ? 'correct' : 'incorrect' %>">
+              <%= entry.status ? 'Correct' : 'Incorrect' %>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+      <form action="/clear-history" method="POST">
+        <button type="submit" class="clearHistoryButton">Clear History</button>
+      </form>
+      <% } else { %>
+      <p>No history available yet. Try answering some riddles!</p>
+      <% } %>
+    </div>
+  </body>
+</html>

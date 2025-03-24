@@ -7,24 +7,40 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <div class="mainContainer">
-  <h1 class="title">Daily Riddle!</h1>
+<div class="mainContainer">
+  <a class="titleButton" href="/">
+    <h1 class="title">Daily Riddle!</h1>
+  </a>
   <h2 class="header">Riddle me this...</h2>
-  <button class="historyButton">History</button>
-  <div class="formContainer">
-  <form method="post" action="submit">
-    <label class="question" for="answer"><%= today.question %></label>
-    <input class="textBox" type="text" id="answer" name="answer">
-    <button class="button" type="submit">Submit</button>
-  </form>
-  <% if (locals.answered != null) { %>
-    <% if (answered) { %>
-      <h2>CORRECT!!!</h2>
-    <% } else { %>
-      <h2>INCORRECT!!</h2>
-    <% } %>
+  <a href="/history">
+    <button class="historyButton">History</button>
+  </a>
+
+  <% if (answered) { %>
+    <div class="formContainer">
+      <h2 class="correctText">CORRECT!!!</h2>
+    </div>
+  <% } else if (showForm) { %>
+    <div class="formContainer">
+      <form method="post" action="/submit">
+        <label class="question" for="answer"><%= today.question %></label>
+        <input class="textBox" type="text" id="answer" name="answer">
+        <% if (locals.answered != null && !answered) { %>
+          <button class="button" type="submit" style="background-color: red;">Try Again</button>
+        <% } else { %>
+          <button class="button" type="submit">Submit</button>
+        <% } %>
+      </form>
+    </div>
+  <% } else { %>
+    <div class="formContainer">
+      <p class="correctText">✅ You've already answered today’s riddle. ✅</p>
+      <a href="/?override=true">
+        <button class="button">Answer Anyway</button>
+      </a>
+    </div>
   <% } %>
-</div>
+
 </div>
   <img class="image" src="/TheRiddler.png" alt="The Riddler">
 </body>

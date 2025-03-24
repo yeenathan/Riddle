@@ -24,6 +24,10 @@ body {
     margin-bottom: 1rem;
 }
 
+.titleButton {
+    text-decoration: none;
+}
+
 .header {
     color: #34495e;
     text-align: center;
@@ -90,6 +94,14 @@ body {
     margin: 0;
     border-radius: 10px;
 }
+
+.correctText {
+    color: #2ecc71;
+    font-size: 5em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1rem;
+}
     
 
 form {
@@ -116,4 +128,63 @@ form {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s;
+}
+
+.historyTable {
+    width: 100%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-collapse: collapse;
+}
+
+.historyTable th,
+.historyTable td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.historyTable th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.historyTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.historyTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+.historyTable caption {
+    caption-side: top;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.clearHistoryButton {
+    background-color: #3498db;
+    font-family: "Segoe UI";
+    font-weight: bold;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.clearHistoryButton:hover {
+    background-color: #1b48ce;
 }
