@@ -10,7 +10,7 @@ app.use(express.static('public'));
 async function getClient() {
   const client = new pg.Client({
     user: "postgres",
-    password: "hihihi2324",
+    password: "**********",
     host: "localhost",
     port: 5432,
     database: "riddles",
