@@ -10,7 +10,7 @@ app.use(express.static('public'));
 async function getClient() {
   const client = new pg.Client({
     user: "postgres",
-    password: "**********",
+    password: "hihihi2324",
     host: "localhost",
     port: 5432,
     database: "riddles",
@@ -80,7 +80,7 @@ app.post("/submit", async (req, res) => {
   const data = await dbInit();
   const answer = req.body["answer"];
   const correctAnswer = data.today["answer"];
-  const riddleText = today.riddle;
+  const riddleText = data.today.riddle;
   const isCorrect = answer.toLowerCase() === correctAnswer.toLowerCase();
   
   await recordAnswer(isCorrect, riddleText);
