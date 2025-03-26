@@ -24,4 +24,6 @@ Create the `riddles` database
     status BOOLEAN
 );
 
+NOTE: Ensure to change the pg.Client info to match your database!
+
 ### 3. Run npm i and node index.js to run locally!
