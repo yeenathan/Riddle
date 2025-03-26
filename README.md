@@ -10,7 +10,7 @@ Create the `riddles` database
 
 ### 2. Create the following tables
 
-#### a. CREATE TABLE riddles (
+#### a. CREATE TABLE riddle (
     id SERIAL PRIMARY KEY,
     question TEXT NOT NULL,
     answer TEXT NOT NULL,
