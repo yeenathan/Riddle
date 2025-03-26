@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Riddle</title>
   <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* Inline styles for attempt tracker boxes */
+    #trackerContainer {
+      margin-top: 10px;
+      display: flex;
+      gap: 5px;
+    }
+    .tracker {
+      width: 20px;
+      height: 20px;
+      background-color: grey;
+      border: 1px solid #000;
+    }
+  </style>
 </head>
 <body>
 <div class="mainContainer">
@@ -22,15 +36,20 @@
     </div>
   <% } else if (showForm) { %>
     <div class="formContainer">
-      <form method="post" action="/submit">
+      <form method="post" action="/submit" onsubmit="return checkAttempts();">
         <label class="question" for="answer"><%= today.question %></label>
         <input class="textBox" type="text" id="answer" name="answer">
         <% if (locals.answered != null && !answered) { %>
-          <button class="button" type="submit" style="background-color: red;">Try Again</button>
+          <button class="button" type="submit" style="background-color: red;" onclick="incrementAttempt()">Try Again</button>
         <% } else { %>
-          <button class="button" type="submit">Submit</button>
+          <button class="button" type="submit" onclick="incrementAttempt()">Submit</button>
         <% } %>
       </form>
+      <div id="trackerContainer">
+        <span class="tracker"></span>
+        <span class="tracker"></span>
+        <span class="tracker"></span>
+      </div>
     </div>
   <% } else { %>
     <div class="formContainer">
@@ -40,8 +59,55 @@
       </a>
     </div>
   <% } %>
-
 </div>
   <img class="image" src="/TheRiddler.png" alt="The Riddler">
+
+  <script>
+    if(sessionStorage.getItem("attemptCount") === null) {
+      sessionStorage.setItem("attemptCount", 0);
+    }
+    
+    let attemptCount = parseInt(sessionStorage.getItem("attemptCount"));
+    console.log("Loaded attempt count: " + attemptCount);
+    updateTracker();
+
+    function incrementAttempt() {
+      attemptCount++;
+      sessionStorage.setItem("attemptCount", attemptCount);
+      console.log("Attempt: " + attemptCount);
+      updateTracker();
+    }
+
+    function updateTracker() {
+      const trackers = document.querySelectorAll("#trackerContainer .tracker");
+      trackers.forEach((tracker, index) => {
+        if(index < attemptCount) {
+          tracker.style.backgroundColor = 'red';
+        } else {
+          tracker.style.backgroundColor = 'grey';
+        }
+      });
+    }
+
+    function checkAttempts() {
+      attemptCount = parseInt(sessionStorage.getItem("attemptCount")) || 0;
+      if (attemptCount >= 3) {
+        var form = document.querySelector('.formContainer form');
+        if (form) {
+          var questionLabel = form.querySelector('label.question');
+          var inputField = form.querySelector('input.textBox');
+          if (questionLabel) questionLabel.style.display = 'none';
+          if (inputField) inputField.style.display = 'none';
+          var submitBtn = form.querySelector('button.button[type="submit"]');
+          if (submitBtn) {
+            submitBtn.textContent = 'Attempts Reached';
+            submitBtn.disabled = true;
+          }
+        }
+        return false; 
+      }
+      return true;
+    }
+  </script>
 </body>
 </html>

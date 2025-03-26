@@ -44,7 +44,7 @@ body {
 }
 
 .question {
-    display: block;
+    display: flex;
     font-family: 'Segoe UI';
     font-size: 1.2em;
     margin-bottom: 15px;
@@ -70,6 +70,7 @@ body {
     font-weight: bold;
     color: white;
     padding: 10px 20px;
+    margin-right: 2.75rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -188,3 +189,15 @@ form {
 .clearHistoryButton:hover {
     background-color: #1b48ce;
 }
+
+.trackerContainer {
+    margin-top: 10px;
+    display: flex;
+    gap: 5px;
+  }
+  .tracker {
+    width: 20px;
+    height: 20px;
+    background-color: grey;
+    border: 1px solid #000;
+  }
