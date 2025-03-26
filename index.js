@@ -12,7 +12,7 @@ async function getClient() {
     host: "localhost",
     database: "riddles",
     port: 5432,
-    password: "hihihi2324",
+    password: "*****",
     user: "postgres"
   });
   await client.connect();
