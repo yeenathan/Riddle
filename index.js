@@ -10,11 +10,15 @@ app.use(express.static("public"));
 async function getClient() {
   const client = new pg.Client({
     host: "localhost",
+    database: "riddles",
+    port: 5432,
+    password: "hihihi2324",
+    user: "postgres"
   });
   await client.connect();
   return client;
 }
-
+ 
 async function dbInit() {
   const client = await getClient();
 
@@ -31,12 +35,24 @@ async function dbInit() {
     );
     const alreadyAnsweredCorrectly = historyResult.rows.length > 0;
 
-    console.log("dbInit result:", { all, today, alreadyAnsweredCorrectly }); // Added logging
+    const attemptsResult = await client.query(
+      "SELECT COUNT(*) as attempts FROM public.history WHERE date = $1 AND riddle = $2",
+      [today.date, today.question]
+    );
+    const currentAttempts = parseInt(attemptsResult.rows[0].attempts);
+
+    console.log("dbInit result:", { 
+      all, 
+      today, 
+      alreadyAnsweredCorrectly, 
+      currentAttempts 
+    });
 
     return {
       all: all,
       today: today,
       alreadyAnsweredCorrectly: alreadyAnsweredCorrectly,
+      currentAttempts: currentAttempts || 0
     };
   } finally {
     client.end();
@@ -67,7 +83,7 @@ async function recordAnswer(status, riddleText) {
       formattedDate,
       status,
       riddleText,
-    }); // Added logging
+    });
 
     await client.query(
       "INSERT INTO public.history (date, status, riddle) VALUES ($1, $2, $3)",
@@ -93,8 +109,9 @@ app.get("/", async (req, res) => {
   console.log("GET / called");
   const data = await dbInit();
 
-  const showFormAnyway = req.query.override === "true"; // <== toggle
-  const hideForm = data.alreadyAnsweredCorrectly && !showFormAnyway;
+  const showFormAnyway = req.query.override === "true"; 
+  const hideForm = (data.alreadyAnsweredCorrectly && !showFormAnyway) || 
+                   (data.currentAttempts >= 3 && !showFormAnyway);
 
   res.render("index.ejs", {
     all: data.all,
@@ -102,12 +119,12 @@ app.get("/", async (req, res) => {
     alreadyAnsweredCorrectly: data.alreadyAnsweredCorrectly,
     showForm: !hideForm,
     answered: null,
+    currentAttempts: data.currentAttempts || 0
   });
 });
 
-
 app.get("/history", async (req, res) => {
-  console.log("GET /history called"); // Added logging
+  console.log("GET /history called");
   try {
     const historyData = await getHistory();
     res.render("history.ejs", { history: historyData });
@@ -118,7 +135,7 @@ app.get("/history", async (req, res) => {
 });
 
 app.post("/submit", async (req, res) => {
-  console.log("POST /submit called"); // Added logging
+  console.log("POST /submit called");
   const data = await dbInit();
   const answer = req.body["answer"];
   const correctAnswer = data.today["answer"];
@@ -130,21 +147,26 @@ app.post("/submit", async (req, res) => {
     correctAnswer,
     riddleText,
     isCorrect,
-  }); // Added logging
+    currentAttempts: data.currentAttempts
+  });
 
   await recordAnswer(isCorrect, riddleText);
+
+  const currentAttempts = (data.currentAttempts || 0) + 1;
+  const showForm = currentAttempts < 3;
 
   res.render("index.ejs", {
     all: data.all,
     today: data.today,
     answered: isCorrect,
     alreadyAnsweredCorrectly: data.alreadyAnsweredCorrectly,
-    showForm: true
+    showForm: showForm,
+    currentAttempts: currentAttempts
   });  
 });
 
 app.post("/clear-history", async (req, res) => {
-  console.log("POST /clear-history called"); // Added logging
+  console.log("POST /clear-history called");
   await clearHistory();
   res.redirect("/history");
 });
