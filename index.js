@@ -12,13 +12,13 @@ async function getClient() {
     host: "localhost",
     database: "riddles",
     port: 5432,
-    password: "hihihi2324",
+    password: "******",
     user: "postgres"
   });
   await client.connect();
   return client;
 }
- 
+
 async function dbInit() {
   const client = await getClient();
 
@@ -100,7 +100,7 @@ async function clearHistory() {
   try {
     await client.query("TRUNCATE public.history RESTART IDENTITY");
     console.log("History table cleared and ID sequence reset");
-  } finally {
+  } finally { 
     client.end();
   }
 }

@@ -66,6 +66,7 @@
     if(sessionStorage.getItem("attemptCount") === null) {
       sessionStorage.setItem("attemptCount", 0);
     }
+    
     let attemptCount = parseInt(sessionStorage.getItem("attemptCount"));
     console.log("Loaded attempt count: " + attemptCount);
     updateTracker();
