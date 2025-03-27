@@ -104,8 +104,18 @@
       var userAnswer = formData.get('answer');
       
       if (!userAnswer) {
-        return false;
-      }
+        if (form) {
+          var questionLabel = form.querySelector('label.question');
+          var inputField = form.querySelector('input.textBox');
+          if (questionLabel) questionLabel.style.display = 'none';
+          if (inputField) inputField.style.display = 'none';
+          var submitBtn = form.querySelector('button.button[type="submit"]');
+          if (submitBtn) {
+            submitBtn.textContent = 'Attempts Reached';
+            submitBtn.disabled = true;
+          }
+        }
+        return false;       }
     }
     return true;
   }
