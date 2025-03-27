@@ -27,3 +27,9 @@ Create the `riddles` database
 NOTE: Ensure to change the pg.Client info to match your database!
 
 ### 3. Run npm i and node index.js to run locally!
+
+# Who Did What
+Jackson: Attempt Tracking, History Page Calling, Database Setup
+Nathan: Calling riddles onto main page, Correct/Incorrect checking, Code enviroment setup, Database setup
+Jon: Frontend, Clear history button, Checking if answered code
+Holden: Frontend, Attempt Tracking bug fixing, Database bug fixing
