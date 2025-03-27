@@ -85,9 +85,10 @@ async function recordAnswer(status, riddleText) {
       riddleText,
     });
 
+    // converts the date to the local timezone
     await client.query(
-      "INSERT INTO public.history (date, status, riddle) VALUES ($1, $2, $3)",
-      [formattedDate, status, riddleText]
+      "INSERT INTO public.history (date, status, riddle) VALUES (now() AT TIME ZONE 'America/Los_Angeles', $1, $2)",
+      [status, riddleText]
     );
   } finally {
     client.end();
