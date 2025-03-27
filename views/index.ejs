@@ -54,7 +54,11 @@
       </div>
     <% } else { %>
       <div class="formContainer">
-        <p class="correctText">✅ You've already answered today's riddle. ✅</p>
+        <% if (alreadyAnsweredCorrectly) { %>
+          <p class="correctText">✅ You've already answered today's riddle. ✅</p>
+        <% } else { %>
+          <p class="question">You've reached the maximum number of attempts.</p>
+        <% } %>
         <a href="/?override=true">
           <button class="button">Answer Anyway</button>
         </a>
@@ -96,18 +100,12 @@
     attemptCount = parseInt(sessionStorage.getItem("attemptCount")) || 0;
     if (attemptCount >= 3) {
       var form = document.querySelector('.formContainer form');
-      if (form) {
-        var questionLabel = form.querySelector('label.question');
-        var inputField = form.querySelector('input.textBox');
-        if (questionLabel) questionLabel.style.display = 'none';
-        if (inputField) inputField.style.display = 'none';
-        var submitBtn = form.querySelector('button.button[type="submit"]');
-        if (submitBtn) {
-          submitBtn.textContent = 'Attempts Reached';
-          submitBtn.disabled = true;
-        }
+      var formData = new FormData(form);
+      var userAnswer = formData.get('answer');
+      
+      if (!userAnswer) {
+        return false;
       }
-      return false; 
     }
     return true;
   }

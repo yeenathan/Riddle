@@ -85,7 +85,6 @@ async function recordAnswer(status, riddleText) {
       riddleText,
     });
 
-    // converts the date to the local timezone
     await client.query(
       "INSERT INTO public.history (date, status, riddle) VALUES (now() AT TIME ZONE 'America/Los_Angeles', $1, $2)",
       [status, riddleText]
@@ -154,13 +153,13 @@ app.post("/submit", async (req, res) => {
   await recordAnswer(isCorrect, riddleText);
 
   const currentAttempts = (data.currentAttempts || 0) + 1;
-  const showForm = currentAttempts < 3;
+  const showForm = !isCorrect && currentAttempts < 3;
 
   res.render("index.ejs", {
     all: data.all,
     today: data.today,
     answered: isCorrect,
-    alreadyAnsweredCorrectly: data.alreadyAnsweredCorrectly,
+    alreadyAnsweredCorrectly: isCorrect || data.alreadyAnsweredCorrectly,
     showForm: showForm,
     currentAttempts: currentAttempts
   });  
