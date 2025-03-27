@@ -15,13 +15,16 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
+    padding-bottom: 20vh;
+    min-height: 70vh;
 }
 
 .title {
     color: #01b05f;
     text-align: center;
-    font-size: 5em;
-    margin-bottom: 1rem;
+    font-size: 4.5em;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
 }
 
 .titleButton {
@@ -32,7 +35,22 @@ body {
     color: #34495e;
     text-align: center;
     font-size: 2.5rem;
-    margin-top: -1rem;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+.card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    width: 85%;
+    max-width: 750px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .formContainer {
@@ -40,17 +58,19 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    width: 100%;
+    text-align: center;
 }
 
 .question {
-    display: flex;
+    display: block;
     font-family: 'Segoe UI';
     font-size: 1.2em;
     margin-bottom: 15px;
     color: #444;
     text-align: center;
-    max-width: 80%;
+    max-width: 90%;
 }
 
 .textBox {
@@ -63,14 +83,13 @@ body {
     text-align: center;
 }
 
-
 .button {   
     background-color: #2ecc71;
     font-family: "Segoe UI";
     font-weight: bold;
     color: white;
     padding: 10px 20px;
-    margin-right: 2.75rem;
+    margin-right: 0;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -87,32 +106,33 @@ body {
 }
 
 .image {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    max-width: 225px;
+    max-width: 20vw;
+    max-height: 25vh;
     margin: 0;
     border-radius: 10px;
+    z-index: 10;
 }
 
 .correctText {
     color: #2ecc71;
-    font-size: 5em;
+    font-size: 4em;
     font-weight: bold;
     text-align: center;
     margin-top: 1rem;
 }
-    
 
 form {
     width: 100%;
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -129,6 +149,7 @@ form {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s;
+    margin: 1rem 0;
 }
 
 .historyTable {
