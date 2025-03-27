@@ -39,12 +39,19 @@
           <% }); %>
         </tbody>
       </table>
-      <form action="/clear-history" method="POST">
-        <button type="submit" class="clearHistoryButton">Clear History</button>
+      <form action="/clear-history" method="POST" id="clearForm">
+        <button type="button" class="clearHistoryButton" onclick="resetAndSubmit()">Clear History</button>
       </form>
       <% } else { %>
       <p>No history available yet. Try answering some riddles!</p>
       <% } %>
     </div>
+
+    <script>
+      function resetAndSubmit() {
+        sessionStorage.setItem("attemptCount", 0);
+        document.getElementById("clearForm").submit();
+      }
+    </script>
   </body>
 </html>
